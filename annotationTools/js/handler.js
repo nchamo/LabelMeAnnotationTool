@@ -82,6 +82,11 @@ function handler() {
       	else new_attributes = RemoveSpecialChars(adjust_attributes);
       }
       
+      if(document.getElementById('verified')) 
+        new_verified = document.getElementById('verified').value;
+      else 
+        new_verified = adjust_verified;
+      
       StopEditEvent();
       
       // Insert data to write to logfile:
@@ -102,6 +107,7 @@ function handler() {
         
       
       LMsetObjectField(LM_xml, obj_ndx, "occluded", new_occluded);
+      LMsetObjectField(LM_xml, obj_ndx, "verified", new_verified);
       
       // Write XML to server:
       WriteXML(SubmitXmlUrl,LM_xml,function(){return;});

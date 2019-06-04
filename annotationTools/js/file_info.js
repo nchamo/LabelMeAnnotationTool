@@ -51,10 +51,15 @@ function file_info() {
                     this.mode = par_value;
 					if (this.mode != 'c' && this.mode != 'f'){
 						$('#prevImage').hide();
-						if (bname == 'Netscape'){
-							$('#label_buttons_contrast').css('left', '545px');
-						}
-						else $('#label_buttons_contrast').css('left', '525px');
+            if (this.mode == 'i') {
+              $('#nextImage').hide();
+              $('#label_buttons_contrast').css('left', '505px');
+            } else {
+  						if (bname == 'Netscape'){
+  							$('#label_buttons_contrast').css('left', '545px');
+  						}
+  						else $('#label_buttons_contrast').css('left', '525px');
+            }
 					}
 					else{
 						$('#prevImage').show();
@@ -172,7 +177,9 @@ function file_info() {
 				}
                 if((par_field=='scribble')&&(par_value=='true')) {
 		             scribble_mode = true;
-		        }
+    		        } else {
+                  scribble_mode = false;
+                }
                 if(par_field=='wordnet'){
                     if(par_value=='false') {
                         autocomplete_mode = false;

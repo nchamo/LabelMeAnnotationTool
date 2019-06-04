@@ -1,0 +1,18 @@
+# This configuration does not include a processing node
+# Which makes for faster setup times
+version: '2.1'
+volumes:
+  Images:
+  Annotations:  
+services:
+  labelme:
+    image: labelme
+    container_name: labelme
+    entrypoint: /bin/bash
+    volumes:
+      - ${WO_MEDIA_DIR}:/LabelMeAnnotationTool/Images
+      - ${WO_ANNOTATIONS_DIR}:/LabelMeAnnotationTool/Annotations
+    ports:
+      - "${WO_PORT}:80"
+    tty: true
+    stdin_open: true

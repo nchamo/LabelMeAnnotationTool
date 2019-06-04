@@ -206,10 +206,11 @@ function GetPopupFormDraw(scribble_form) {
   }
   html_str += HTMLobjectBox("");
   
+  html_str += HTMLverifiedBox("");
   if(use_attributes) {
-    html_str += HTMLoccludedBox("");
     html_str += "<b>Enter attributes</b><br />";
     html_str += HTMLattributesBox("");
+    html_str += HTMLoccludedBox("");
   }
   if(use_parts) {
     html_str += HTMLpartsBox("");
@@ -240,15 +241,17 @@ function GetPopupFormEdit(anno) {
   if(obj_name=="") obj_name = "?";
   var attributes = LMgetObjectField(LM_xml,anno.anno_id,'attributes');
   var occluded = LMgetObjectField(LM_xml,anno.anno_id,'occluded');
+  var verified = LMgetObjectField(LM_xml,anno.anno_id,'verified');
   var parts = LMgetObjectField(LM_xml, anno.anno_id, 'parts');
   
   html_str = "<b>Enter object name</b><br />"; 
   html_str += HTMLobjectBox(obj_name);
   
+  html_str += HTMLverifiedBox(verified);
   if(use_attributes) {
-    html_str += HTMLoccludedBox(occluded);
     html_str += "<b>Enter attributes</b><br />";
     html_str += HTMLattributesBox(attributes);
+    html_str += HTMLoccludedBox(occluded);
   }
   
   if(use_parts) {
@@ -351,6 +354,31 @@ function HTMLoccludedBox(occluded) {
   else {
     html_str += '<input type="radio" name="rboccluded" id="rboccluded" value="yes"  onclick="document.getElementById(\'occluded\').value=\'yes\';" />yes';
     html_str += '<input type="radio" name="rboccluded" id="rboccluded" value="no" checked="yes"  onclick="document.getElementById(\'occluded\').value=\'no\';" />no';
+  }
+  html_str += '<br />';
+  
+  return html_str;
+}
+
+function HTMLverifiedBox(verified) {
+  var html_str="";
+  
+  // by default, the value of verified is "0"
+  if (!(verified=="0" || verified=="1")) {
+    verified="0";
+  }
+  
+  // the value of the selection is inside a hidden field:
+  html_str += 'Is verified? <input type="hidden" name="verified" id="verified" value="'+verified+'"/>';
+  
+  // generate radio button
+  if (verified=='1') {
+    html_str += '<input type="radio" name="rbverified" id="rbverified" value="1" checked="yes" onclick="document.getElementById(\'verified\').value=\'1\';" />yes';
+    html_str += '<input type="radio" name="rbverified" id="rbverified" value="0"  onclick="document.getElementById(\'verified\').value=\'0\';" />no';
+  }
+  else {
+    html_str += '<input type="radio" name="rbverified" id="rbverified" value="1"  onclick="document.getElementById(\'verified\').value=\'1\';" />yes';
+    html_str += '<input type="radio" name="rbverified" id="rbverified" value="0" checked="yes"  onclick="document.getElementById(\'verified\').value=\'0\';" />no';
   }
   html_str += '<br />';
   

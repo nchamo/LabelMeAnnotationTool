@@ -70,7 +70,8 @@ function StartEditEvent(anno_id,event) {
 
   // Make edit popup appear.
   main_media.ScrollbarsOff();
-  if(LMgetObjectField(LM_xml, anno.anno_id, 'verified')) {
+  // if(LMgetObjectField(LM_xml, anno.anno_id, 'verified')) {
+  if(false) {
     edit_popup_open = 1;
     var innerHTML = "<b>This annotation has been blocked.</b><br />";
     var dom_bubble = CreatePopupBubble(pt[0],pt[1],innerHTML,'main_section');
@@ -141,6 +142,7 @@ function StopEditEvent() {
 var adjust_objEnter = '';
 var adjust_attributes;
 var adjust_occluded;
+var adjust_verified;
 
 /** This function is called when the user clicks 'Adjust Polygon' button */
 function AdjustPolygonButton() {
@@ -165,6 +167,7 @@ function AdjustPolygonButton() {
 	  adjust_attributes = document.getElementById('attributes').value;
 	  adjust_occluded = document.getElementById('occluded').value;
   }
+  adjust_verified = document.getElementById('verified').value;
   // Close the edit popup bubble:
   CloseEditPopup();
 

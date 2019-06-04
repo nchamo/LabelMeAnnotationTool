@@ -117,7 +117,7 @@ function LMnumberOfObjects(xml) {
 */
 function LMsetObjectField(xml, ind_object, name, value){
 	var obj = $(xml).children("annotation").children("object").eq(ind_object);
-	if (name == 'name' || name == 'automatic' || name == 'attributes' || name == 'occluded' || name == 'deleted' || name == 'id'){
+	if (name == 'name' || name == 'automatic' || name == 'attributes' || name == 'occluded' ||  name == 'verified' || name == 'deleted' || name == 'id'){
 		if (obj.children(name).length > 0) obj.children(name).text(value);
 		else if (name != 'automatic') obj.append("<"+name+">"+value+"</"+name+">");
 	}

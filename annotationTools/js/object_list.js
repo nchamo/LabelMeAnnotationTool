@@ -65,6 +65,7 @@ function RenderObjectList() {
     }
     
     var isDeleted = parseInt(LMgetObjectField(LM_xml,ii,'deleted'));
+    var isVerified = parseInt(LMgetObjectField(LM_xml,ii,'verified'));
     var is_currently_shown = true;
     
     if(is_currently_shown && (((ii<num_orig_anno)&&((view_Existing&&!isDeleted)||(isDeleted&&view_Deleted))) || ((ii>=num_orig_anno)&&(!isDeleted||(isDeleted&&view_Deleted))))) {
@@ -117,6 +118,12 @@ function RenderObjectList() {
       }
       else {
 	html_str += obj_name;
+      }
+      
+      if (isVerified) {
+        html_str += " (verified)";
+      } else {
+        html_str += " (to verify)";
       }
       
       if(isDeleted) html_str += '</b>';
