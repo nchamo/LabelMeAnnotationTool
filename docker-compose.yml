@@ -3,7 +3,10 @@
 version: '2.1'
 volumes:
   Images:
-  Annotations:  
+  Annotations:
+networks:
+  web:
+    external: true     
 services:
   labelme:
     image: labelme
@@ -12,7 +15,15 @@ services:
     volumes:
       - ${WO_MEDIA_DIR}:/LabelMeAnnotationTool/Images
       - ${WO_ANNOTATIONS_DIR}:/LabelMeAnnotationTool/Annotations
-    ports:
-      - "${WO_PORT}:80"
+    expose:
+      - "80"
     tty: true
     stdin_open: true
+    labels:
+      - traefik.backend=labelme
+      - traefik.frontend.rule=Host:labelme.${WO_HOST}
+      - traefik.docker.network=web
+      - traefik.port=80
+      - traefik.enable=true
+    networks:
+      - web  

@@ -4,7 +4,6 @@ __dirname=$(cd $(dirname "$0"); pwd -P)
 cd "${__dirname}"
 # Load default values
 source .env
-DEFAULT_PORT="$WO_PORT"
 DEFAULT_HOST="$WO_HOST"
 DEFAULT_MEDIA_DIR="$WO_MEDIA_DIR"
 DEFAULT_ANNOTATIONS_DIR="$WO_ANNOTATIONS_DIR"
@@ -16,11 +15,6 @@ do
 key="$1"
 
 case $key in
-    --port)
-    export WO_PORT="$2"
-    shift # past argument
-    shift # past value
-    ;;    
     --hostname)
     export WO_HOST="$2"
     shift # past argument
@@ -56,8 +50,6 @@ usage(){
   echo "	rebuild			Rebuild all docker containers and perform cleanups"
   echo ""
   echo "Options:"
-  echo "	--port	<port>	Set the port that WebODM should bind to (default: $DEFAULT_PORT)"
-  echo "	--hostname	<hostname>	Set the hostname that LabelMe will be accessible from (default: $DEFAULT_HOST)"
   echo "	--media-dir	<path>	Path where processing results will be stored to (default: $DEFAULT_MEDIA_DIR (docker named volume))"
   echo "	--annotations-dir	<path>	Path where label results will be stored to (default: $DEFAULT_ANNOTATIONS_DIR (docker named volume))"
   exit
@@ -73,7 +65,6 @@ start(){
 	echo "Using the following environment:"
 	echo "================================"
 	echo "Host: $WO_HOST"
-	echo "Port: $WO_PORT"
 	echo "Media directory: $WO_MEDIA_DIR"
   echo "Annotations directory: $WO_ANNOTATIONS_DIR"
 	echo "================================"
